@@ -14,56 +14,65 @@ namespace WinForms2
     {
         private Player player1;
         private Player player2;
-        private Player player3;
-
-        private TurnMngr Combat;
+        private TurnMngr combat;
 
         public Form1()
         {
             InitializeComponent();
             player1 = new Player();
             player2 = new Player();
-            player3 = new Player();
-            Combat = new TurnMngr();
-            Combat.Party1.Add(player1);
-            Combat.Party1.Add(player2);
-            Combat.Party1.Add(player3);
-            Combat.Party1[2].Health = 50;
-            P1HPProg.Value = Combat.Party1[Combat.Turn].Health;
-            P1ATK.Text = "ATK: " + Combat.Party1[Combat.Turn].AtkPwr;
-            P1DEF.Text = "DEF: " + Combat.Party1[Combat.Turn].DefPwr;
+            combat = new TurnMngr();
+
+
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
+
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
+
         }
 
         private void EndTurn_Click(object sender, EventArgs e)
         {
-            Combat.Turn = Combat.Turn + 1;
-            P1HPProg.Value = Combat.Party1[Combat.Turn].Health;
-            P1ATK.Text = "ATK: " + Combat.Party1[Combat.Turn].AtkPwr;
-            P1DEF.Text = "DEF: " + Combat.Party1[Combat.Turn].DefPwr;
+
         }
     }
 
     public class TurnMngr
     {
-        public List<Player> Party1 = new List<Player>();
-        public List<Player> Party2 = new List<Player>();
         private int m_turn;
+        private int m_phase;
 
-        public int Turn { get { return m_turn; }  set { if (m_turn < 3 && value < 2) m_turn = value; else m_turn = 1; }  }
+        public int Turn { get { return m_turn; } set { m_turn = value; } }
 
         public TurnMngr()
         {
             Turn = 1;
         }
     }
+
+    public class Party
+    {
+        private int m_ID;
+
+        public List<Player> members = new List<Player>();
+
+        public void AddPlayer(Player p)
+        {
+            members.Add(p);
+            p.onEndTurn += NextPlayer;
+        }
+
+        public void NextPlayer()
+        {
+            m_ID++;
+        }
+    }
+
     public class Player
     {
         private int m_level;
@@ -72,7 +81,16 @@ namespace WinForms2
         private int m_health;
         private int m_atkpwr;
         private int m_defpwr;
-        
+
+        public delegate void OnEndTurn();
+
+        public OnEndTurn onEndTurn;
+
+        public void EndTurn()
+        {
+            if (onEndTurn != null)
+                onEndTurn.Invoke();
+        }
         public int ExpUp()
         {
             m_experience++;
@@ -97,6 +115,18 @@ namespace WinForms2
         public int Health { get { return m_health; } set { m_health = value; } }
         public int AtkPwr { get { return m_atkpwr; } set { m_atkpwr = value; } }
         public int DefPwr { get { return m_defpwr; } set { m_defpwr = value; } }
+
+        public bool Attack(Player b)
+        {
+            if (b.Health > 0)
+            {
+                b.Health -= AtkPwr - b.DefPwr;
+                return true;
+            }
+            else
+                return false;
+        }
+
         public Player()
         {
             m_level = 1;
@@ -105,6 +135,6 @@ namespace WinForms2
             m_health = 100;
             m_atkpwr = 20;
             m_defpwr = 10;
-        } 
+        }
     }
 }
