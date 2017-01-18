@@ -38,6 +38,7 @@
             this.P1ATK = new System.Windows.Forms.Label();
             this.P1DEF = new System.Windows.Forms.Label();
             this.EndTurn = new System.Windows.Forms.Button();
+            this.PlayerNameDisplay = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // P1ATKButton
@@ -121,11 +122,23 @@
             this.EndTurn.UseVisualStyleBackColor = true;
             this.EndTurn.Click += new System.EventHandler(this.EndTurn_Click);
             // 
+            // PlayerNameDisplay
+            // 
+            this.PlayerNameDisplay.AutoSize = true;
+            this.PlayerNameDisplay.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.PlayerNameDisplay.Location = new System.Drawing.Point(61, 13);
+            this.PlayerNameDisplay.Name = "PlayerNameDisplay";
+            this.PlayerNameDisplay.Size = new System.Drawing.Size(61, 18);
+            this.PlayerNameDisplay.TabIndex = 26;
+            this.PlayerNameDisplay.Text = "Player 1";
+            this.PlayerNameDisplay.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(181, 339);
+            this.Controls.Add(this.PlayerNameDisplay);
             this.Controls.Add(this.EndTurn);
             this.Controls.Add(this.P1DEF);
             this.Controls.Add(this.P1ATK);
@@ -155,6 +168,7 @@
         private System.Windows.Forms.Label P1ATK;
         private System.Windows.Forms.Label P1DEF;
         private System.Windows.Forms.Button EndTurn;
+        private System.Windows.Forms.Label PlayerNameDisplay;
     }
 }
 
