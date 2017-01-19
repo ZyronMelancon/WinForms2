@@ -84,5 +84,27 @@ namespace WinForms2
             m_defpwr = 10;
             m_action = 0;
         }
+
+        public Player(string n)
+        {
+            Name = n;
+            Level = 1;
+            Experience = 0;
+            m_expcap = 1;
+            Health = 100;
+            AtkPwr = 20;
+            DefPwr = 10;
+            Action = 0;
+        }
+        public Player(string n, int h, int a, int d)
+        {
+            Name = n;
+            Level = 1;
+            Health = h;
+            AtkPwr = a;
+            DefPwr = d;
+            Action = 0;
+        }
+
     }
 }

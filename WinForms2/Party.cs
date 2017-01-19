@@ -24,7 +24,7 @@ namespace WinForms2
         }
         public void GoNext()
         {
-            if (m_index < members.Count()-1)
+            if (m_index < members.Count-1)
                 m_index++;
             else
                 m_index = 0;
@@ -32,7 +32,7 @@ namespace WinForms2
 
         public int NextPlayer()
         {
-            if (m_index < members.Count() - 1)
+            if (m_index < members.Count - 1)
                 return m_index + 1;
             else
                 return 0;

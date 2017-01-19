@@ -27,7 +27,6 @@ namespace WinForms2
             else
                 m_index = 0;
         }
-
         public int NextParty()
         {
             if (m_index < parties.Count() - 1)
